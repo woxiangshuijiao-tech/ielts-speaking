@@ -204,7 +204,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <div class="desc">请在视野中分别指出<strong>中期</strong>细胞和<strong>后期</strong>细胞。点击你判断正确的细胞即可。</div>
   <div class="taskbar"><span class="tag" id="metaTag">中期：未找到</span><span class="tag" id="anaTag">后期：未找到</span></div>
   <div class="hotwrap">
-    <img src="microscope.png" alt="洋葱根尖显微镜视野">
+    <img src="press-moderate.webp" alt="洋葱根尖显微镜视野">
     <div class="imgclicklayer" onclick="wrongImage(event)"></div>
     <div class="hotspot" id="metaSpot" style="left:46.69%;top:28.45%;width:8.3%;height:13.6%" onclick="hitCell('meta',event)"></div>
     <div class="hotspot" id="anaSpot" style="left:60.91%;top:45.76%;width:11.5%;height:7.7%" onclick="hitCell('ana',event)"></div>
@@ -275,7 +275,7 @@ function coverTouch(side){
 }
 function check3(){coverVerified=coverComplete&&!coverDirect;if(coverVerified)fb('f3','ok','操作正确：盖玻片一侧先接触载玻片，再缓慢放下另一侧。先左后右或先右后左都可以。');else if(coverDirect)fb('f3','bad','从中间直接按下会使盖玻片整体覆盖，容易产生气泡。请点击“重新放置”后再试。');else fb('f3','info','盖玻片还有一侧悬空，请继续点击另一侧。');updateDyeStep()}
 
-const tooLight='press-too-light.png', moderate='press-moderate.png', tooHeavy='press-too-heavy.png';
+const tooLight='press-too-light.webp', moderate='press-moderate.webp', tooHeavy='press-too-heavy.webp';
 function preview(){press=+$('range').value;$('pv').textContent=press;['tl','tg','th'].forEach(id=>$(id).classList.remove('on'));if(press<35){$('mainimg').src=tooLight;$('tl').classList.add('on')}else if(press<=68){$('mainimg').src=moderate;$('tg').classList.add('on')}else{$('mainimg').src=tooHeavy;$('th').classList.add('on')}}
 function pickPressMethod(x){pressMethod=x;[1,2].forEach(k=>$('pm'+k).classList.toggle('sel',k===x))}
 function check4(){if(pressMethod!==1){fb('f4','bad',pressMethod===2?'压片时不应旋转盖玻片，避免材料发生剪切或盖玻片移位。':'请先选择压片方式。');return}if(press>=35&&press<=68){fb('f4','ok','操作正确：垫吸水纸、拇指垂直下压，且力度合适，细胞分散成较薄的一层。');$('b4').disabled=false;$('n4').classList.add('done')}else fb('f4','bad',press<35?'压片过轻，细胞未充分分散。':'压片过重，可能使细胞结构受损。')}
